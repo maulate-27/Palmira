@@ -18,8 +18,8 @@ public class Steghide {
 		// Criptografar / embutir
         	SteghideEncryptor encryptor = new SteghideEncryptor(steghide);
        		ProcessResult res1 = encryptor.embed(cover, secret, senha);
-        	System.out.println("Embed exit=" + res1.exitCode);
-        	System.out.println(res1.output);
+        	System.out.println("Embed exit=" + res1.getExitCode());
+        	System.out.println(res1.getOutput());
      }catch(Exception e){
      	System.out.println("Erro " + e.getMessage());
      }
@@ -28,11 +28,12 @@ public class Steghide {
 	public void decriptar(){
 	
 	try{
-		// Decriptografar / extrair
+	
+		//Decriptografar / extrair
         	SteghideDecryptor decryptor = new SteghideDecryptor(steghide);
         	ProcessResult res2 = decryptor.extract(cover, senha, saida);
-        	System.out.println("Extract exit=" + res2.exitCode);
-        	System.out.println(res2.output);
+        	System.out.println("Extract exit=" + res2.getExitCode());
+        	System.out.println(res2.getOutput());
    }catch(Exception e){
    	System.out.println("Erro " + e.getMessage());
    }
@@ -42,7 +43,7 @@ public class Steghide {
 	try{
 		ProcessResult res3 = FileViewer.viewFile(saida);
 		System.out.println("Conteudo do arquivo extraido:");
-		System.out.println(res3.output);
+		System.out.println(res3.getOutput());
 	}catch(Exception e){
 		System.out.println("Erro" + e.getMessage());
 	}
