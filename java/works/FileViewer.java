@@ -24,9 +24,13 @@ public class FileViewer {
 
     public static ProcessResult viewFile(File file) throws Exception {
         List<String> cmd = new ArrayList<>();
-        cmd.add("cmd.exe");
-        cmd.add("/c");  // /c -> executa e fecha
-        cmd.add("type");
+        if(System.getProperty("os.name").toLowerCase().contains("win")) {
+        	cmd.add("cmd.exe");
+        	cmd.add("/c");  // /c -> executa e fecha
+        	cmd.add("type");
+        }else{
+        	cmd.add("cat");
+        }
         cmd.add(file.getAbsolutePath());
         return runCommand(cmd);
     }

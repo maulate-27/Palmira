@@ -5,12 +5,15 @@ import works.*;
 
 // Classe principal para testar
 public class Steghide {
-
-	File steghide = new File("C:\\Program Files\\steghide\\steghide.exe"); // caminho do steghide
-  File cover = new File("P:\\mira.jpg");   // imagem de capa
-  File secret = new File("P:\\mensagem.txt"); // arquivo a esconder
-  File saida = new File("P:\\saida.txt");
-  String senha = "minhaSenhaForte";
+	private static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().contains("win");
+	
+	File steghide = IS_WINDOWS ? 
+		new File("C:\\Program Files\\steghide\\steghide.exe") : // caminho do steghide
+		new File("/usr/bin/steghide");
+  	File cover = new File("shadai.jpg");   // imagem de capa
+  	File secret = new File("camilo.txt"); // arquivo a esconder
+  	File saida = new File("saida.txt");
+  	String senha = "minhaSenhaForte";//senha
   
   
 	public void encriptar(){
@@ -55,22 +58,18 @@ public class Steghide {
         int opcao;
 				
 				do {
-				
 				System.out.println("--------------------- Menu --------------------------- \n\t1.Encriptar\n\t2.Decriptar\n\t3.Ver Mensagem\n\t0.sair");
 				opcao = sc.nextInt();
 				
 				switch(opcao){
 					case 1:
-        				st.encriptar();
+        		st.encriptar();
         	break;
-
 					case 2:
         		st.decriptar();
         	break;
-        	
         	case 3:
         		st.ver_mensagem();
-        	
         	default:
         	break;
         }
